@@ -2,6 +2,7 @@ const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogni
 
 if (SpeechRecognition) {
   const recognition = new SpeechRecognition();
+  const promptTextarea = document.querySelector('#prompt-textarea');
 
   recognition.lang = 'pt-BR';
   recognition.continuous = true;
@@ -15,19 +16,8 @@ if (SpeechRecognition) {
 
     if (transcript === "ativar") {
       isRecording = true;
+      promptTextarea.textContent = 'Fale algo..';
       console.log('Gravação iniciada. Fale a pergunta...');
-    } else if (transcript === "desativar") {
-      isRecording = false;
-      if (recordedText) {
-        console.log('Texto acumulado enviado para o GPT:', recordedText);
-        const promptTextarea = document.querySelector('#prompt-textarea');
-        if (promptTextarea && promptTextarea.getAttribute('contenteditable') === 'true') {
-          promptTextarea.textContent += recordedText;
-        } else {
-          console.error('Elemento #prompt-textarea não encontrado ou não é contenteditable.');
-        }
-        recordedText = '';
-      }
     } else if (transcript === "enviar") {
       const sendButton = document.querySelector('button[aria-label="Enviar prompt"][data-testid="send-button"]');
       if (sendButton) {
@@ -46,6 +36,7 @@ if (SpeechRecognition) {
       }
     } else if (isRecording) {
       recordedText += transcript + ' ';
+      promptTextarea.textContent = recordedText;
     }
   };
 

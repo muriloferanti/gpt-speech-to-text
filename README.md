@@ -18,7 +18,6 @@ Este script permite interagir com o GPT por meio de comandos de voz diretamente 
 
 4. **Comandos Disponíveis**:
    - **"Ativar"**: Inicia a gravação da fala.
-   - **"Desativar"**: Para a gravação e envia o texto capturado para o campo de input configurado.
    - **"Enviar"**: Simula o envio do texto capturado.
    - **"Apagar"**: Limpa o campo de input.
 
